@@ -1,0 +1,27 @@
+#!/bin/sh
+
+if [ -z $DEVNAME ] ; then
+	DEVNAME="eth1"  ;
+fi
+
+if [ ! -d /proc/driver/aironet ] ; then
+	echo "Fatal error : aironet driver not found\n"
+	echo "intall aironet driver or check if aironet card inserted\n\n"
+	exit -1
+fi
+
+if [ -d /proc/driver/aironet/$DEVNAME ] ; then
+
+	#firmware 4.25.x with airo-linux package
+	echo 'Mode: r' > /proc/driver/aironet/$DEVNAME/Config
+	echo 'Mode: y' > /proc/driver/aironet/$DEVNAME/Config
+	sleep 1;
+
+	#firmware 5.40.x with cisco driver package
+	IWPRIV=/sbin/iwpriv
+	$IWPRIV $DEVNAME setRFMonitor on
+
+fi
+
+
+

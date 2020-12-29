@@ -1,0 +1,101 @@
+#!/bin/bash
+
+. scripts/functions
+. etc/config.sh
+
+RETVAL=0
+prog="garuda"
+
+start() {
+	# Check if atd is already running
+	if [ ! -d $LOG_DIR ]; then
+		echo "log directory is not found , make install"
+		exit 0
+		fi
+
+	if [ ! -d $LOCK_DIR ]; then
+		echo "lock directory is not found, make install"  
+		exit 0
+		fi
+
+	if [ ! -x $SBIN_DIR/garuda ]; then
+		echo "binary garuda is not found, make install" 
+		exit 0
+		fi
+	
+	. scripts/aironet-rfmon-trigger
+
+	if [ ! -f $LOCK_DIR/garuda ]; then
+	    echo -n $"Starting $prog: "
+	    daemon $SBIN_DIR/garuda $GARUDA_OPTS
+	    RETVAL=$?
+	    [ $RETVAL -eq 0 ] && touch $LOCK_DIR/garuda
+	    echo 
+	fi
+
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Stopping $prog: "
+	killproc $SBIN_DIR/garuda
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && rm -f $LOCK_DIR/garuda
+	echo
+
+        return $RETVAL
+}
+
+clean() {
+	rm -rf $LOG_DIR/attack.log $LOG_DIR/statistics.log $LOG_DIR/session.log $LOG_DIR/system.log $LOG_DIR/member.log
+	rm -rf $LOCK_DIR/garuda  ;
+	killall -9 $prog ;
+}
+
+	
+
+restart() {
+	stop
+	start
+}	
+
+reload() {
+	restart
+}	
+
+status_at() {
+ 	status $SBIN_DIR/garuda
+}
+
+case "$1" in
+start)
+	start
+	;;
+stop)
+	stop
+	;;
+reload|restart)
+	restart
+	;;
+clean)
+	clean
+	;;
+teststop)
+	teststop
+	;;
+
+condrestart)
+	if [ -f /var/lock/subsys/garuda ]; then
+	    restart
+	fi
+	;;
+status)
+	status_at
+	;;
+*)
+	echo $"Usage: $0 {start|stop|restart|clean|condrestart|status}"
+	exit 1
+esac
+
+exit $?
+exit $RETVAL

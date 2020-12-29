@@ -1,0 +1,8 @@
+# garuda portable rule set, refer doc/Rules.txt
+match Id:0x65, Risk:0x1, Pkt.type:DATA, Pkt.datfprint:"intentionally blank 1", Desc:"Netsturmbler 3.3.0 scan" ;
+match Id:0x66, Risk:0x1, Pkt.type:DATA, Pkt.dat.orgcode:0x00601d, Desc:"Netstumbler 3.x.x scan" ;
+count Id:0x67, Risk:0x3, Count:0x20, Timer:0x3, Pkt.type:MGT_AUTHENTICATION, Desc:"Authentication request flood attack" ; 
+count Id:0x68, Risk:0x3, Count:0x20, Timer:0x3, Pkt.type:MGT_PROBE_REQ, Desc:"Netstumbler or Probe scan";
+count Id:0x69, Risk:0x3, Count:0x40, Timer:0x3, Pkt.type:MGT_ASSOC_REQ, Desc:"Association request flood attack";
+count Id:0x6a, Risk:0x3, Count:0x40, Timer:0x3, Pkt.type:MGT_PROBE_REQ, Desc:"Probe req flood attack";
+match Id:0x6b, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.ssid:"ANY", Desc:"Rogue AP ANY found";

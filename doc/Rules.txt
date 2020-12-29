@@ -1,0 +1,126 @@
+
+ first released by 
+ Seunghyun Seo <truefroggie@hotmail.com>, <seo@igrus.inha.ac.kr>
+
+
+ Rules
+=====================================================================
+ step 1. define ACTION
+  The first word of each rule must start ACTION( match, count, stats )
+   ex) match
+
+ step 2. set necessary fields
+  if you want to use match ACTION, you have to set following field
+  Id, Risk, Pkt.type 
+  else if you want to use count, you have to set 
+  Id, Risk, Count, Timer, Pkt.type
+   ex) match Id:0x100, Risk:0x3, Pkt.type:DATA
+
+ step 3. set signatures in the last fields
+  you can set all of layer 2 802.11 wireless field with your user-defined 
+  signatures, each field set could be refered following 
+  "Fields" section
+   ex) match Id:0x100, Risk:0x3, Pkt.type:DATA, Pkt.dat.orgcode:0x00601d
+
+ step 4. add rule description
+  write descrtiption about attack, it will be printed at detect.log
+   ex) match Id:0x100, Risk:0x3, Pkt.type:DATA, Pkt.dat.orgcode:0x00601d, Desc:"Netstumber 3.x.x scan found"
+ 
+
+
+ Fields
+=====================================================================
+
+UNIT	SIZE	TYPE	DEFINITION	EXAMPLE
+---------------------------------------------------------------------
+hex1	1	byte	0x[0-f][0-f]	0x11
+hex2	2	bytes	0x[0-f][0-f][0-f][0-f]	0x1122
+hex3	3	bytes	0x[0-f][0-f][0-f][0-f][0-f][0-f]	0x112233
+hex4	4	bytes	0x[0-f][0-f][0-f][0-f][0-f][0-f][0-f][0-f]	0x11223344
+hexes	less then 32	bytes	| [0-f] [0-f] ¡¦ ¡¦ [0-f] [0-f] |	| 0a 0d 01 99 |
+string	less then 32	bytes	"[a-zA-Z0-9 ]*"	"Internationally halt"
+bool	1	bit	True or False	TRUE
+definded symbol			definite symbols	MGT_BEACON
+			MGT_ASSOC_REQ       	
+			MGT_ASSOC_RESP      	
+			MGT_REASSOC_REQ     	
+			MGT_REASSOC_RESP    	
+			MGT_PROBE_REQ       	
+			MGT_PROBE_RESP      	
+			MGT_BEACON          
+			MGT_ATIM            
+			MGT_DISASS          
+			MGT_AUTHENTICATION  
+			MGT_DEAUTHENTICATION
+			CTRL_PS_POLL        
+			CTRL_RTS            
+			CTRL_CTS            
+			CTRL_ACKNOWLEDGEMENT
+			CTRL_CFP_END        
+			CTRL_CFP_ENDACK     
+			DATA                
+			DATA_CF_ACK         
+			DATA_CF_POLL        
+			DATA_CF_ACK_POLL    
+			DATA_NULL_FUNCTION  
+			DATA_CF_ACK_NOD     	
+			DATA_CF_POLL_NOD    	
+			DATA_CF_ACK_POLL_NOD	
+
+
+FIELD NAME	SIZE	TYPE	UNIT	EXAMPLE
+---------------------------------------------------------------------
+Pkt.type  	2	bytes	hex2	0x0080
+Pkt.todsflg  	1	bit	bool	True
+Pkt.fromdsflg  	1	bit	bool	True
+Pkt.morefragflg  	1	bit	bool	True
+Pkt.retryflg  	1	bit	bool	True
+Pkt.fromdsflg  	1	bit	bool	True
+Pkt.morefragflg  	1	bit	bool	True
+Pkt.retryflg  	1	bit	bool	True
+Pkt.pwrmgtflg  	1	bit	bool	True
+Pkt.moredatflg  	1	bit	bool	True
+Pkt.wepflg  	1	bit	bool	True
+Pkt.orderflg  	1	bit	bool	True
+Pkt.duration  	2	bytes	hex2	0x0001
+Pkt.addr1  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.addr2  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.addr3  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.seq  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.addr4  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.mgt.authnum  	2	bytes	hex2	0x0011
+Pkt.mgt.authseq  	2	bytes	hex2	0x0001
+Pkt.mgt.beaconinterval  	2	bytes	hex2	0x0064
+Pkt.mgt.capability  	2	bytes	hex2	0x13
+Pkt.mgt.currentap  	6	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.mgt.listeninterval  	2	bytes	hex2	0x1122
+Pkt.mgt.reasoncode  	2	bytes	hex2	0x1122
+Pkt.mgt.associd  	2	bytes	hex2	0x1122
+Pkt.mgt.statuscode  	2	bytes	hex2	0x0000
+Pkt.mgt.timestamp  	8	bytes	hexes	| 0a 0d 03 03 22 34 | 
+Pkt.mgt.ssid  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	"NESPOT"
+Pkt.mgt.supportedrates  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	| 82 84 8b 96|
+Pkt.mgt.fhparam  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	| 01 02 03 |
+Pkt.mgt.dsparam  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	0x0a
+Pkt.mgt.cfparam  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	| 00 33 22 |
+Pkt.mgt.ibssparam  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	| bb cc dd |
+Pkt.mgt.tim  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	| 00 01 00 00 |
+Pkt.mgt.challenge  	less then 32	bytes	"hex1, hex2, hex3, hex4, hexes, string"	"md5sum:"
+Pkt.dat.dsap  	1	byte	hex	0xaa
+Pkt.dat.ssap  	1	byte	hex	0xaa
+Pkt.dat.ctrl  	1	byte	hex	0x11
+Pkt.dat.orgcode  	3	bytes	hex3	0x112244
+Pkt.dat.proto  	2	bytes	hex2	0x0080
+Pkt.dat.ip.proto  	2	bytes	hex2	0x0001
+Pkt.dat.ip.srcip  	4	bytes	hex4	0x11223344
+Pkt.dat.ip.dstip  	4	bytes	hex4	0x22334455
+Pkt.dat.ip.tcp.srcport  	2	bytes	hex2	0x11aa
+Pkt.dat.ip.tcp.dstport  	2	bytes	hex2	0x2234
+Pkt.dat.ip.udp.srcport  	2	bytes	hex2	0x3344
+Pkt.dat.ip.udp.dstport  	2	bytes	hex2	0x9933
+Pkt.mgtfprint  	less then 32	bytes	"hexes, string"	"ANY"
+Pkt.datfprint  	less then 32	bytes	"hexes, string"	"www."
+Pkt.ctrlfprint  	less then 32	bytes	"hexes, string"	"aaaa"
+Pkt.ipfprint  	less then 32	bytes	"hexes, string"	"query"
+Pkt.tcpfprint  	less then 32	bytes	"hexes, string"	"telent"
+Pkt.udpfprint	less then 32	bytes	"hexes, string"	"root"

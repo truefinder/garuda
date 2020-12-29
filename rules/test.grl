@@ -1,0 +1,18 @@
+match Id:0x1, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.ssid:"ANY", Desc:"ANY rogue AP found"  ;
+match Id:0x2, Risk:0x5, Pkt.type:DATA, Pkt.datfprint:"average", Desc:"IP Signature - top traffic" ;
+match Id:0x3, Risk:0x1, Pkt.type:DATA, Pkt.datfprint:|08 01 09 02 02|, Desc:"something hexes example" ;
+match Id:0x4, Risk:0x1, Pkt.type:DATA, Pkt.datfprint:"intentionally blank 1", Desc:"Netsturmbler 3.3.0 scan" ;
+match Id:0x5, Risk:0x1, Pkt.type:DATA, Pkt.dat.orgcode:0x00601d, Desc:"Netstumbler 3.x.x scan" ;
+count Id:0x6, Risk:0x3, Count:0x20, Timer:0x3, Pkt.type:MGT_BEACON, Desc:"Beacon count similar to DoS" ;
+count Id:0x7, Risk:0x3, Count:0x20, Timer:0x3, Pkt.type:MGT_AUTHENTICATION, Desc:"Auth flood attack" ; 
+count Id:0x8, Risk:0x3, Count:0x20, Timer:0x3, Pkt.type:MGT_PROBE_REQ, Desc:"Probe req flood attack";
+match Id:0x9, Risk:0x1, Pkt.type:MGT_AUTHENTICATION, Desc:"Authentication request found" ;
+match Id:0xa, Risk:0x1, Pkt.type:DATA, Pkt.todsflg:True, Desc:"DATA to ds packets found " ;
+match Id:0xb, Risk:0x1, Pkt.type:DATA, Pkt.fromdsflg:True, Desc:"DATA from ds packets found " ;
+match Id:0xc, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.addr1:|ff ff ff ff ff ff|, Desc:"Broadcast Beacon" ;
+match Id:0xd, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.duration:0x00000000, Desc:"Duration search" ;
+match Id:0xe, Risk:0x1, Pkt.type:MGT_AUTHENTICATION, Pkt.mgt.authseq:0x0001, Desc:"Open System Authentication packet found" ;
+match Id:0xf, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.capability:0x0001, Desc:"Capability field found" ;
+match Id:0x10, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.ssid:"abcdef", Desc:"abcedf AP found"  ;
+match Id:0x11, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.dsparam:0x05, Desc:"Channel 5 detected"  ;
+match Id:0x12, Risk:0x1, Pkt.type:MGT_BEACON, Pkt.mgt.ssid:"NESPOT", Desc:"NESPOT AP found nearly"  ;

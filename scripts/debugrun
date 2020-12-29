@@ -1,0 +1,5 @@
+#!/bin/sh
+./sbin/garuda -c etc/garuda.conf
+#./sbin/garuda -f etc/filter.cfg -r rules/test.rule -L log -i eth1 
+#./sbin/garuda -f etc/filter.cfg -r rules/test.rule -L log -i eth1 -D
+#./sbin/garuda -f etc/filter.cfg -r rules/test.rule -L log -S -s 802_11sample.dump

@@ -1,0 +1,83 @@
+
+ first released by
+ Seunghyun Seo <truefroggie@hotmail.com>,<seo@igrus.inha.ac.k>
+
+
+ Logs
+=====================================================================
+
+  system.log
+ ------------
+  - usage:
+    print initialization messages and error messages,
+    asynchronous updating
+
+  - log format:
+   . string ended "\n"
+
+
+  detect.log
+ ------------
+  - usage:
+   print detection information
+   asynchronous updating
+
+  - log format: 
+   . detection time
+   . host name
+   . unique rule id
+   . attack type ( match, count, stats )
+   . attack risk (low 1 - high 5 )
+   . source mac address
+   . destination mac address
+   . bssid mac address
+   . SSID name
+   . attack description
+	
+
+  session.log
+ -------------
+  - usage:
+   print current wireless object session
+   periodical synchronous updating
+
+  - log format:
+   . first seen time
+   . last seen time
+   . packet count
+   . totoal size
+   . source mac address
+   . destination mac address
+   . bssid mac address
+   . source ip
+   . destination ip
+
+
+  statistics.log
+ ----------------
+  - usage:
+   print wirelss packet statistics
+   periodical synchronous updating
+
+  - log format:
+   . frame type (string)
+   . count
+
+
+  member.log
+ ------------
+  - usage:
+   print wireless object information
+   periodical synchronous updating
+
+  - log format:
+   . first seen time
+   . id (sequencial increase )
+   . object type (sta - station, ap )
+   . mac address
+   . bssid mac address
+   . ip
+   . SSID
+
+
+

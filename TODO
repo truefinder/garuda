@@ -1,0 +1,20 @@
+
+Garuda
+Copyright (C) 2004 Seunghyun Seo <truefroggie@hotmail.com>
+
+$Id: TODO,v 1.2 2004/06/23 10:08:05 seunghyun Exp $
+
+
+0.3.0
+ - Optimizing Session management
+ - New data structure "Around-list" implementation
+ - Web interface 
+
+
+0.2.0:
+ - Database support for local log
+ - Comportable configuration support
+ - Statistics for tcp/ip
+ - Upgrading session related algorithm
+
+

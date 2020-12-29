@@ -1,0 +1,148 @@
+
+ Installation 
+======================================================================
+
+ # make 
+
+  After making binaries, read scripts/install and modify several 
+  variables in it,  install script will run after type "make install"
+  simply, you need not modify install script, if you will use 
+  /usr/local/garuda as the garuda's install directory
+ 
+ # make install
+
+
+ Configuration (garuda.conf & mysql )
+======================================================================
+ 
+ Garuda version 0.2.0 or higher supports convenicence config file 
+ garuda.conf. after garuda installation procedure, you can find 
+ it at installed etc directory. various options are very simple so 
+ you can set each variables with instinct.
+
+ especially to configure mysql support of garuda, you have to 
+ set four values MysqlUse, MysqlHost, MysqlUser, MysqlPass in garuda.conf.
+
+ MysqlUse On
+ MysqlHost "<mysql server ip or hostname>"
+ MysqlUser "<mysql user>"
+ MysqlPass "<mysql pass>"
+
+ and also you have to make database and tables for garuda
+ you could find these structures at etc/garuda.sql
+ create them by typing
+
+ # mysql -u <super user id> -p <passwd> < etc/garuda.sql
+
+
+ if you set them properly, it should work well in your front eyes.
+
+
+ Configuration (old Daemon)
+======================================================================
+
+open "config.sh" script in your garuda/etc directory and 
+ set following variables 
+
+ 1) GARUDA_DIR : absolute path of garuda 
+  ex) GARUDA_DIR="/home/seo/devel/garuda" 
+
+ 2) DEVNAME :  wireless device name on your system 
+  ex) DEVNAME="eth1"
+
+ 3) GARUDA_OPTS : command line options 
+  1. you have to set  -f, -r, and -L options necessarily
+     -f < filter file > , -r < rule file > , -L < log directory >   
+  2. set garuda's running mode
+    a.1)  if you want to set simulating mode with wireless pcap dump file
+       -S -s < pcap dump file>
+    a.2) if you want to set real-time running mode 
+       -i <device name> 
+    b) -D means garuda runs as a deamon  
+       if -D option is not included in your GARUDA_OPTS, 
+       Setting script will be also failed, because that it should not 
+       returns exit code to Setting script 
+   
+  3. recommanded GARUDA_OPTS examples are here
+    in case of simulating mode
+    ex) GARUDA_OPTS="-f $FILTER_PATH -r $RULE_PATH -L $LOG_DIR \
+                   -S -s $SAMPLE_PATH -D"
+    in case of real-time mode
+    ex) GARUDA_OPTS="-f $FILTER_PATH -r $RULE_PATH -L $LOG_DIR \
+                   -i $DEVNAME -D "
+
+ * In additional, you can also set several critical variables if you needed
+   FILTER_PATH, RULE_PATH, LOG_DIR, DEVNAME, SAMPLE_PATH 
+   for suit your taste
+
+ * Please, Read Setting script in detail before you start garuda WIDS system,
+   set each variables properly in Setting script never to fail to start/run
+
+
+
+ Configuration (New firmware and driver )
+======================================================================
+
+ If you use cisco aironet 350 firmware 5.20.x or higher,
+ it is highly recommanded to install Cisco supported linux driver 
+ you could download it from "Cisco Software Center" (linux-acu-driver-v21.tar.gz)
+
+ following steps will help you to install it
+  1. download it 
+  2. extract it
+  3. remove comment about definition "INCLUDE_RFMONITOR" in driver/airo.c
+  4. type "./install"
+  5. restart pcmcia service
+  6. iwpriv <DEVICENAME> setRFMonitor on 
+
+ it may be easy for programming skilleld person. 
+ good luck.
+
+ it tested with 
+  - RedHat 9.0 (Shrike)
+  - Cisco Aironet 350 PCMCIA Card (firmware 5.40.10)
+  - linux-acu-driver-v21.tar.gz
+
+
+
+ Configuration (Old firmware and driver )
+=====================================================================
+
+ 1. Cisco Aironet card firmware installation 
+
+ If you use cisco aironet card firmware version 5.20.70 or higher ,
+ downgrade your firmware under 4.25.30 to using airo-linux package
+ 5.20.70 got some problem to switchover normal to rfmon mode
+ (cf.  https://bugzilla.redhat.com/bugzilla/show_bug.cgi?id=97167 )
+ downgrade could be done by "Aironet Client Utility" 
+ you can get firmware from here "Cisco Software Center"
+ http://www.cisco.com/pcgi-bin/tablebuild.pl/aironet_firmware_350
+
+
+ 2. Linux Kernel driver installation
+
+  * case of using pcmcia-cs )
+	1. get linux kernel and extract it into /usr/src/linux
+	2. type "make menuconfig", 
+		release "PCMCIA/CardBus" option in General setup
+	3. re-install your kernel 
+	4. get pcmcia-cs-3.2.X.tgz and extract into /usr/src/pcmcia
+	5. get airo-linux-CVSversion and extracet it into /usr/src/airo-linux,
+	(you can get airo-linux package from http://airo-linux.sourceforge.net ) 
+	6. copy all files under /usr/src/airo-linux/kernel/ into /usr/src/pcmcia/wireless
+	7. compile pcmcia-cs and restart it 	
+	./Configure ; make all ; make install ; /etc/init.d/pcmcia restart
+
+  * case of using kernel-pcmcia-cs )
+	1. get linux kernel and extract it into /usr/src/linux
+	2. type "make menuconfig", 
+		check  "PCMCIA/CardBus" option in General setup 
+		check  "Wireless LAN (non-hamradio)" in Network device support 
+		check  "Cisco/Aironet 34X/35X/4500/4800 PCMCIA cards (NEW)" 
+		in Wireless Pcmcia card support 
+	3. extracet airo-linux.tgz into /usr/src/airo-linux
+	4. copy all files under /usr/src/airo-linux/kernel/ into /usr/src/linux/net/wireless
+	5. re-install your kernel 
+
+
+

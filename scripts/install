@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PREFIX="$1"
+INSTDIR="${PREFIX}/garuda"
+
+mkdir ${INSTDIR}
+mkdir ${INSTDIR}/log ${INSTDIR}/lock ${INSTDIR}/sbin 
+cp -f src/garuda  ${INSTDIR}/sbin/
+cp -rf scripts  ${INSTDIR}
+mv ${INSTDIR}/scripts/rungaruda ${INSTDIR}
+mv ${INSTDIR}/scripts/debugrun ${INSTDIR}
+
+cp -rf rules ${INSTDIR}
+cp -rf etc ${INSTDIR}
+
+echo "========================================================="
+echo ""
+echo "             Install complete !!!"
+echo "             run garuda from your ${INSTDIR} "
+echo ""
+echo "========================================================="
+
+
