@@ -29,8 +29,10 @@ What is the garuda ?
 Quick Installation 
 ======================================================================
 ```
-# make 
-# make install
+$ git clone git@github.com:truefinder/garuda.git
+$ cd garuda 
+$ make 
+$ make install
 ```
 
 
