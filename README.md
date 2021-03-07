@@ -22,11 +22,9 @@ What is the garuda ?
   * Statistics for local wireless network
   * Handling rule-based detecting module
 
- For the latest version of garuda, go to:
-
-	http://garuda.sourceforge.net or
-	http://sourceforge.net/projects/garuda
-
+ first released at http://garuda.sourceforge.net , 2004 
+ not maintenanced now, only for academic purpose 
+	
 
 Quick Installation 
 ======================================================================
@@ -76,7 +74,7 @@ Recommanded packages
 * openssl-0.9.7a-2 or higher
 * libpacp-0.7.2-1 or higher
 
-Redhat 9.0 is also good selection to run garuda
+Any linux is also good selection to run garuda
 
 
 
