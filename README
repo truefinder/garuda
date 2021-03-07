@@ -1,6 +1,7 @@
 
- What is the garuda ?
+What is the garuda ?
 ======================================================================
+
  garuda is a wireless intrusion detection system (WIDS) , supports 
  802.11 wireless lan. it's designed for detecting  war drivers, 
  rouge ap, DoS attacks and even MAC spoofing,  including rule-based 
@@ -29,14 +30,14 @@
 
 
 
- Quick Installation 
+Quick Installation 
 ======================================================================
  # make 
  # make install
 
 
 
- Start & Stop 
+Start & Stop 
 ======================================================================
  * Start 
  # ./rungaruda start
@@ -49,7 +50,7 @@
 
 
 
- Description of each directories 
+Description of each directories 
 ======================================================================
  src/  ==> source codes 
  etc/  ==> configuration files 
@@ -60,7 +61,7 @@
 
 
 
- Recommanded packages 
+Recommanded packages 
 ======================================================================
  linux kernel 2.4.26 or higher
  pcmacia-cs-3.2.7 or higher
@@ -72,7 +73,7 @@
 
 
 
- Contacts 
+Contacts 
 ======================================================================
  Seunghyun Seo <truefroggie@hotmail.com>, <seo@igrus.inha.ac.kr>
 
