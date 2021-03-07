@@ -83,7 +83,7 @@ Redhat 9.0 is also good selection to run garuda
 Contacts 
 ======================================================================
 
-Seunghyun Seo <truefroggie@hotmail.com>, <seo@igrus.inha.ac.kr>
+Seunghyun Seo 
 
 
 
