@@ -28,54 +28,62 @@ What is the garuda ?
 	http://sourceforge.net/projects/garuda
 
 
-
-
 Quick Installation 
 ======================================================================
- # make 
- # make install
-
+```
+# make 
+# make install
+```
 
 
 Start & Stop 
 ======================================================================
- * Start 
+
+* Start 
+``` 
  # ./rungaruda start
-
- * Stop 
+```
+* Stop
+``` 
  # ./rungaruda stop
-
- If you failed to start or stop, clear garbage files 
- # ./rungaruda clear 
-
+```
+* Clear
+If you failed to start or stop, clear garbage files 
+```
+# ./rungaruda clear 
+```
 
 
 Description of each directories 
 ======================================================================
+
+```
  src/  ==> source codes 
  etc/  ==> configuration files 
  scripts/ ==> install, configuration, aironet-rfmon triggers ... etc
  rules/ ==> detection rules
  doc/ ==> documents about garuda 
  templets/ ==> recommaned source code templetes
-
+```
 
 
 Recommanded packages 
 ======================================================================
- linux kernel 2.4.26 or higher
- pcmacia-cs-3.2.7 or higher
- airo-linux current CVS version or Cisco provided driver
- openssl-0.9.7a-2 or higher
- libpacp-0.7.2-1 or higher
 
- % Redhat 9.0 is also good selection to run garuda
+* linux kernel 2.4.26 or higher
+* pcmacia-cs-3.2.7 or higher
+* airo-linux current CVS version or Cisco provided driver
+* openssl-0.9.7a-2 or higher
+* libpacp-0.7.2-1 or higher
+
+Redhat 9.0 is also good selection to run garuda
 
 
 
 Contacts 
 ======================================================================
- Seunghyun Seo <truefroggie@hotmail.com>, <seo@igrus.inha.ac.kr>
+
+Seunghyun Seo <truefroggie@hotmail.com>, <seo@igrus.inha.ac.kr>
 
 
 
